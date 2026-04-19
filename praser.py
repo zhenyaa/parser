@@ -35,9 +35,8 @@ class Parser:
                     "page": self.page,
                     "title": text
                 })
-
             time.sleep(5)
-# /html/body/app-root/app-history/one-column-layout/wu-header/sidenav/mat-sidenav-container/mat-sidenav-content/div[2]/section/div[2]/div/div[3]/div/div/lib-city-history-summary/div/div[2]/table/tbody[1]/tr[1]/td[1]
+
 if __name__ == "__main__":
     page = 'https://www.wunderground.com/history/daily/ng/lagos/DNMM'
     parser = Parser(page)
