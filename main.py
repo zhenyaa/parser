@@ -1,6 +1,7 @@
 import os
+from pprint import pprint
 
-from py_clob_client import ClobClient
+from py_clob_client import ClobClient, BookParams, ApiCreds
 from selenium import webdriver
 from multiprocessing import Process, Queue
 
@@ -16,7 +17,6 @@ HOST = "https://clob.polymarket.com"
 CHAIN_ID = 137
 PRIVATE_KEY = os.getenv("POLY_TOKEN")
 FUNDER = "<your-funder-address>"
-
 client = ClobClient(
     HOST,  # The CLOB API endpoint
     key=PRIVATE_KEY,  # Your wallet's private key
@@ -24,8 +24,32 @@ client = ClobClient(
     signature_type=1,  # 1 for email/Magic wallet signatures
 
 )
-data = client.get_midpoint(84)
-print(data)
+
+next_page = "MA=="
+key_word = 'temperature'
+result = []
+
+for i in range(1, 200):
+
+    a: dict = client.get_orders(next_cursor=next_page)
+    print(a)
+    next_page = a['next_cursor']
+    print(a)
+    # for i in a['data']:
+    #     if key_word in i['question']:
+    #         result.append(i)
+#
+# pprint(result)
+# print(len(result))
+
+# for i in a["data"][:20]:
+#     pprint(i)
+# token_id = "537"
+# mid = client.get_midpoint(token_id)
+# price = client.get_price(token_id, side="BUY")
+# book = client.get_order_book(token_id)
+# books = client.get_order_books([BookParams(token_id=token_id)])
+# print(mid, price)
 # class UserProcess:
 #     def __init__(self):
 #         self.q = Queue()
@@ -45,5 +69,5 @@ print(data)
 
 
 if __name__ == "__main__":
-    print("well")
+    print("program finish")
     # UserProcess().run()
